@@ -33,27 +33,8 @@
                 </h3>
             </div>
             <div class="jumbotron">
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                    <div class="btn-group" role="group">
-                        <input class="btn btn-primary" name="B3" onclick="ptzUpSubmit()" type="button" value="↑" />
-                    </div>
-                    <div class="btn-group" role="group">
-                        <input class="btn btn-primary" name="B2" onclick="ptzDownSubmit()" type="button" value="↓" />
-                    </div>
-                    <div class="btn-group" role="group">
-                        <input class="btn btn-primary" name="B1" onclick="ptzLeftSubmit()" type="button" value="←" />
-                    </div>
-                    <div class="btn-group" role="group">
-                        <input class="btn btn-primary" name="B0" onclick="ptzRightSubmit()" type="button" value="→" />
-                    </div>
-                </div>
                 <form method="get" name="form1" target="test"></form>
-                <iframe name="test" style="display: none;" width="0" height="0"></iframe>
-                <img id="img1" src="" border="0">
                 <p class="text-center">
-                    <a class="btn btn-lg btn-danger" href="#" role="button" id="iniciar">
-                        Iniciar camara
-                    </a>
                     <a class="btn btn-lg btn-success" href="#" role="button" id="abrir">
                         Abrir puerta
                     </a>
@@ -93,78 +74,6 @@
             var img = new Image();
             var imgObj;
 
-            function preload()
-            {
-                img.src='/tmpfs/auto.jpg?'+new Date;
-            }
-
-            function changesrc()
-            {
-                img1.src=img.src;
-                preload();
-                setTimeout(changesrc,3500);
-            }
-
-            function update()
-            {
-                $('#iniciar').fadeOut('slow');
-                imgObj = document.getElementById('img1');
-                
-                imgObj.src = img.src;
-                img.src = cams_url+"/tmpfs/auto.jpg?" + (new Date()).getTime();
-            }
-
-            function takeError()
-            {
-                $('#iniciar').fadeIn('slow');
-                img.src = cams_url+"/tmpfs/auto.jpg?" + (new Date()).getTime();
-            }
-
-            function startonload()
-            {
-                img.src = cams_url+"/tmpfs/auto.jpg?" + (new Date()).getTime();
-                img.onerror=takeError;
-                img.onload=update;
-            }
-
-            function load()
-            {
-                if (navigator.appName.indexOf("Microsoft IE Mobile") != -1)
-                {
-                    preload();
-                    changesrc();
-                    return;
-                }
-                startonload();
-            }
-
-            function ptzUpSubmit()
-            {
-               
-                form1.action=controles_url+"cgi-bin/hi3510/ytup.cgi";
-                form1.submit();
-            }
-
-            function ptzDownSubmit()
-            {
-                form1.action=controles_url+"cgi-bin/hi3510/ytdown.cgi";
-                form1.submit();
-            }
-
-            function ptzLeftSubmit()
-            {
-                form1.action=controles_url+"cgi-bin/hi3510/ytleft.cgi";
-                form1.submit();
-            }
-
-            function ptzRightSubmit()
-            {
-                form1.action=controles_url+"cgi-bin/hi3510/ytright.cgi";
-                form1.submit();
-            }
-            $('#iniciar').on('click',function(){
-                window.open('http://10.211.159.109/tmpfs/auto.jpg', '_blank')
-            });
             $('#abrir').on('click',function(){
                     
                 var url = "http://10.211.159.120:4040/abrir";
